@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% block invoice_content %}
+
+
+    <form class="form" method="POST" action="" id="invoice_form">
+        {% csrf_token %}
+        {{ formset.management_form }}
+
+
+        <!-- CUSTOMER CARD -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-0">
+
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header">
+                        <a data-toggle="collapse" href="#customer-info" aria-expanded="true"
+                           aria-controls="collapse-example" id="customer-heading" class="d-block">
+                            <label class="m-0 font-weight-bold text-primary">Customer Information</label>
+                            <i class="fa fa-chevron-down pull-left" style="font-size:16px"></i>
+                        </a>
+                    </div>
+                    <!-- Card Body -->
+                    <div id="customer-info" class="card-body collapse show">
+                        <!-- CUSTOMER TABLE -->
+                        <div class="table-responsive">
+                            <table class="table" id="table-customer1">
+                                <tr>
+                                    <td>
+                                        <label class="form-label" for="first_name">First name</label>
+                                        {{ customer_form.first_name }}
+                                    </td>
+
+                                    <td>
+                                        <label class="form-label" for="last_name">Last name</label>
+                                        {{ customer_form.last_name }}
+                                    </td>
+                                    <td>
+                                        <label class="form-label" for="company">Company</label>
+                                        {{ customer_form.company }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label class="form-label" for="phone">Phone number</label>
+                                        {{ customer_form.phone }}
+                                    </td>
+                                    <td>
+                                        <label class="form-label" for="alt_phone">Alt phone number</label>
+                                        {{ customer_form.alt_phone }}
+                                    </td>
+                                    <td>
+                                        <label class="form-label" for="email">Email</label>
+                                        {{ customer_form.email }}
+                                    </td>
+                                </tr>
+
+                                <table class="table" id="table-customer2">
+                                    <tr>
+                                        <td>
+                                            <label class="form-label" for="address">Address</label>
+                                            {{ customer_form.address }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="city">City</label>
+                                            {{ customer_form.city }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="state">State</label>
+                                            {{ customer_form.state }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="zip">Zip Code</label>
+                                            {{ customer_form.zip }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTRACTOR CARD -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-0">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header">
+                        <a data-toggle="collapse" href="#contractor-info" aria-expanded="true"
+                           aria-controls="collapse-example" id="contractor-heading" class="d-block">
+                            <label class="m-0 font-weight-bold text-primary">Contractor Information</label>
+                            <i class="fa fa-chevron-down pull-left" style="font-size:16px"></i>
+                        </a>
+                    </div>
+                    <!-- Card Body -->
+                    <div id="contractor-info" class="card-body collapse show">
+                        <!-- CONTRACTOR TABLE -->
+                        <div class="table-responsive">
+                            <table class="table" id="table-contractor1">
+                                {{ contractor_form.id }}
+                                <tr>
+                                    <td>
+                                        <label class="form-label" for="contractor_first_name">First name</label>
+                                        {{ contractor_form.contractor_first_name }}
+                                    </td>
+
+                                    <td>
+                                        <label class="form-label" for="contractor_last_name">Last name</label>
+                                        {{ contractor_form.contractor_last_name }}
+                                    </td>
+                                    <td>
+                                        <label class="form-label" for="contractor_company">Company</label>
+                                        {{ contractor_form.contractor_company }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <label class="form-label" for="contractor_phone">Phone number</label>
+                                        {{ contractor_form.contractor_phone }}
+                                    </td>
+                                    {#                                    <td>#}
+                                    {#                                        <label class="form-label" for="alt_phone">Alt phone number</label>#}
+                                    {#                                        {{ contractor_form.alt_phone }}#}
+                                    {#                                    </td>#}
+                                    <td>
+                                        <label class="form-label" for="contractor_email">Email</label>
+                                        {{ contractor_form.contractor_email }}
+                                    </td>
+                                </tr>
+
+                                <table class="table" id="table-contractor2">
+                                    <tr>
+                                        <td>
+                                            <label class="form-label" for="contractor_address">Address</label>
+                                            {{ contractor_form.contractor_address }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="contractor_city">City</label>
+                                            {{ contractor_form.contractor_city }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="contractor_state">State</label>
+                                            {{ contractor_form.contractor_state }}
+                                        </td>
+                                        <td>
+                                            <label class="form-label" for="contractor_zip">Zip Code</label>
+                                            {{ contractor_form.contractor_zip }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- INVOICE HEADER -->
+        <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-12 col-lg-7">
+                <div class="card shadow mb-0">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                        <div class="col-sm-8">
+                            <!-- Card Header - Dropdown -->
+                            {#                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">#}
+                            <label class="m-0 font-weight-bold text-primary">Create Invoice</label>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="form-label m-0" for="id"
+                                   style="font-weight: bold;">Invoice Number: </label>
+                            {{ dummy_invoice_num }}
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="form-label m-0" for="date"
+                                   style="font-weight: bold;">Date: </label>
+                            {{ date }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCT FORM -->
+        <!-- Card Body -->
+        <div class="card-body">
+            {{ product_detail_formset.management_form }}
+            {% for form in product_detail_formset %}
+                {% for product in product_formset %}
+                    <div class="product-table">
+                        <table class="product-table">
+                            <tr>
+                                {{ form.id }}
+                                <td style="border: 0; padding: .2em; width: 12%">
+                                    <label class="form-label" for="product_vendor">Vendor</label>
+                                    {{ product.product_vendor }}
+                                </td>
+                                <td style="border: 0; padding: .2em; width: 12%">
+                                    <label class="form-label" for="product_material">Material</label>
+                                    {{ product.product_material }}
+                                </td>
+                                <td style="border: 0; padding: .2em; width: 35%">
+                                    <label class="form-label" for="product">Product</label>
+                                    {{ form.product}}
+                                </td>
+                                {#                            <td style="border: 0; padding: .2em; width: 35%">#}
+                                {#                                <label class="form-label" for="find_product">Find Product</label>#}
+                                {#                                {{ form.find_product }}#}
+                                {#                            </td>#}
+                                <td style="border: 0; padding: .2em; width: 5%">
+                                    <label class="form-label" for="product_unit">Unit</label>
+                                    {{ form.product_unit }}
+                                </td>
+                                <td style="border: 0; padding: .2em; width: 8%">
+                                    <label class="form-label" for="product_qty">Qty</label>
+                                    {{ form.product_qty }}
+                                </td>
+                                <td style="border: 0; padding: .2em; width: 8%">
+                                    <label class="form-label" for="product_price">Price</label>
+                                    {{ form.product_price }}
+                                </td>
+                                <td style="border: 0; padding: .2em; width: 8%">
+                                    <label class="form-label" for="product_total">Total</label>
+                                    {{ form.product_total }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                {% endfor %}
+            {% endfor %}
+            <br>
+
+
+
+            <!-- INVOICE TABLE -->
+            <div class="table-responsive">
+                <table class="table" id="invoice-table">
+                    <tr>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="payment_type">Payment
+                                Type</label>
+                            {{ invoice_form.payment_type }}
+                        </td>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="deposit">Deposit</label>
+                            {{ invoice_form.deposit }}
+                        </td>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="subtotal">Subtotal</label>
+                            {{ invoice_form.subtotal }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="payment_status">Payment
+                                Status</label>
+                            {{ invoice_form.payment_status }}
+                        </td>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="balance">Balance</label>
+                            {{ invoice_form.balance }}
+                        </td>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="tax">Sales Tax</label>
+                            {{ invoice_form.tax }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="invoiceTD"></td>
+                        <td class="invoiceTD"></td>
+                        <td class="invoiceTD">
+                            <label class="form-label" for="total"
+                                   style="font-weight: bold;">Total</label>
+                            {{ invoice_form.total }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <label class="form-label" for="invoice_notes">Notes</label>
+                {{ invoice_form.invoice_notes }}
+            </div>
+            <br>
+
+            <div class="mb-3 d-flex justify-content-center">
+                <input class="btn btn-outline-warning add-form-row"
+                       style="margin: 1em 1em 1em 1em; width: 30%"
+                       type="button" value="Add Product" id="add_product">
+                <input class="btn btn-info" style="margin: 1em 1em 1em 1em; width: 30%"
+                       type="submit" name="submit invoice" value="submit" id="submit_forms">
+            </div>
+            </table>
+        </div>
+        </div>
+        </div>
+
+    </form>
+    </div>
+
+
+{% endblock %}
+
+</body>
+</html>

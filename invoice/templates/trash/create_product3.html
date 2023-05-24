@@ -1,0 +1,92 @@
+{#{% extends "invoice/base/base.html" %}#}
+
+
+<!-- Content Row -->
+{% block content %}
+    <div class="row">
+        <!-- Area Chart -->
+        <div class="col-xl-12 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <label class="m-0 font-weight-bold text-primary">New Product Entry</label>
+                </div>
+                <!-- Card Body For Entering New Products -->
+                <div class="card-body">
+                    <form method="post" action="" id="create_product_form">
+                        {% csrf_token %}
+                        {{ product_formset.management_form }}
+                        {% for form in product_formset %}
+                            <div class="flex-container">
+                            {{ form.id }}
+
+{#                                    <label class="form-label" for="product_vendor">Vendor</label>#}
+{#                                    {{ product.product_vendor }}#}
+{##}
+{#                                    <label class="form-label" for="product_material">Material</label>#}
+{#                                    {{ product.product_material }}#}
+
+                                    <label class="form-label" for="product">Product</label>
+                                    {{ form.product}}
+
+{#                                    <label class="form-label" for="product_unit">Unit</label>#}
+{#                                    {{ form.product_unit }}#}
+
+                                    <label class="form-label" for="product_qty">Qty</label>
+                                    {{ form.product_qty }}
+
+                                    <label class="form-label" for="product_price">Price</label>
+                                    {{ form.product_price }}
+
+                                    <label class="form-label" for="product_total">Total</label>
+                                    {{ form.product_total }}
+                                </td>
+                            </div>
+
+
+                        {% endfor %}
+                        <div class="mb-3 d-flex justify-content-center">
+                            <input class="btn btn-info" style="margin: 1em 1em 1em 1em; width: 30%"
+                                   type="submit" name="Create product">
+
+                            <input class="btn btn-outline-warning add-form-row"
+                                   style="margin: 1em 1em 1em 1em; width: 30%"
+                                   type="button" value="New product entry" id="new_product">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block custom_js %}
+    <script>
+        function cloneMore(selector, type) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + type + '-TOTAL_FORMS').val();
+            newElement.find(':input').each(function () {
+                var name = $(this).attr('name').replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+            });
+            newElement.find('label').each(function () {
+                var newFor = $(this).attr('for').replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr('for', newFor);
+            });
+            total++;
+            $('#id_' + type + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+        }
+
+        $('#add_more').click(function () {
+            cloneMore('div.table:last', 'form');
+        });
+
+        $('#new_product').click(function () {
+            cloneMore('div.product-table:last', 'product_form');
+        });
+
+    </script>
+{% endblock %}

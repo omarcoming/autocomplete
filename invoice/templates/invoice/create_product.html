@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block head_script %}
+        <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+        {{ product_formset.media }}
+    {% endblock head_script %}
+</head>
+<body>
+
+<div class="search-container">
+
+    <form method="post">
+        {% csrf_token %}
+        {% for form in product_formset %}
+            {% for field in form %}
+                {{ field.label }}
+                {{ field }}
+            {% endfor %}
+        {% endfor %}
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+
+</body>
+
+</html>
